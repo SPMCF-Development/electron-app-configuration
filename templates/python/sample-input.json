@@ -1,0 +1,31 @@
+{
+  "timeframe": "monthly",
+  "timesteps": 12,
+  "rollingQuarters": 20,
+  "numSimulations": 5000,
+  "marketValueFile": "./mv_data.xlsx",
+  "cmaFile": "./cma.csv",
+  "spendingPolicy": [
+    [
+      "2026-10-31",
+      0.05,
+      0.05,
+      0.05,
+      false
+    ]
+  ],
+  "additionalPolicy": [
+    [
+      "2026-10-31",
+      5000000
+    ]
+  ],
+  "inflationScenarios": [
+    [
+        0.025,
+        0.027,
+        0.03,
+        0.035
+    ]
+  ]
+}
