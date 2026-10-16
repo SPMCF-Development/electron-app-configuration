@@ -23,6 +23,7 @@ export default function IntField({ id, label, value, onChange }: IntFieldProps):
           min={1}
           step={1}
           inputMode="numeric"
+          className="bg-background"
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
