@@ -99,7 +99,7 @@ export default function EditableTable({
 
   return (
     <div className="space-y-3">
-      <div className="rounded-md border">
+      <div className="rounded-md border bg-background">
         <Table>
           <TableHeader>
             <TableRow>
