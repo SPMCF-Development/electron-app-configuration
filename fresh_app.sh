@@ -9,6 +9,18 @@ echo "The backend defaults to Python that is packaged into the final application
 # Import .env file for custom variables
 set -a; source fresh_app.env; set +a
 
+# set_var_css <block-start> <var-name> <new-value> <css-path>
+set_var_css() {
+  local block="$1" name="$2" value="$3" css="$4"
+  sed -i.bak -E "/${block}/,/^}/ s|^([[:space:]]*--${name}:)[^;]*;|\1 ${value};|" "${css}"
+}
+
+# set_fontsource <package-name> <css-path>
+set_fontsource() {
+  local package="$1" css="$2"
+  sed -i.bak -E "s|^@import [\"']@fontsource-variable/[^\"']+[\"']|@import \"@fontsource-variable/${package}\"|" "${css}"
+}
+
 # Build custom variables
 MAIN="src/main"
 PRELOAD="src/preload"
@@ -230,6 +242,26 @@ npx shadcn@latest add \
   table \
   alert \
   button-group --overwrite
+
+# Download Roboto font
+npm install @fontsource-variable/roboto
+
+# Update main.css
+## Teal: lm oklch(0.438 0.074 208) dm oklch(0.738 0.074 208)
+## Gold: lm oklch(0.78 0.161 80.5) dm oklch(... 0.161 80.5)
+## Red-Orange: lm oklch(0.568 0.163 44.6) dm oklch(... 0.163 44.6)
+## Brown: lm oklch(0.496 0.017 74.3) dm oklch(... 0.017 74.3)
+## Green: lm oklch(0.568 0.099 125) dm oklch(... 0.099 125)
+## Gray: lm oklch(0.866 0.011 76.6) dm oklch(... 0.011 76.6)
+## Light Green: lm oklch(0.85 0.051 109) dm oklch(... 0.051 109)
+## Light Blue: lm oklch(0.84 0.021 234) dm oklch(... 0.021 234)
+## Web Light Blue: lm oklch(0.908 0.01 228.9) dm oklch(0.208 0.01 228.9)
+set_fontsource roboto "$ASSETS/main.css"
+set_var_css '^@theme' font-sans "'Roboto Variable', sans-serif" "$ASSETS/main.css"
+set_var_css '^:root' card 'oklch(0.908 0.01 228.9)' "$ASSETS/main.css"
+set_var_css '^:root' primary 'oklch(0.438 0.074 208)' "$ASSETS/main.css"
+set_var_css '^\.dark' card 'oklch(0.208 0.01 228.9)' "$ASSETS/main.css"
+set_var_css '^\.dark' primary 'oklch(0.738 0.074 208)' "$ASSETS/main.css"
 
 # Final reminders
 echo "The workspace is now ready for development."
