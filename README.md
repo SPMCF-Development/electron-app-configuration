@@ -33,7 +33,9 @@ Helpful docs for those unfamiliar with Javascript/Typescript:
 
 Javascript is necessary to use electron-vite apps. This project recommends installing [Node Version Manager](https://github.com/nvm-sh/nvm).
 After installing `nvm`, run the following to install the latest stable version of [Node.js](https://nodejs.org/en):
-`nvm install --lts`
+```bash
+$ nvm install --lts
+```
 
 ### Run `fresh_app.sh`
 
@@ -42,7 +44,9 @@ Clone this repository to your projects folder.
 Update the file `fresh_app.env` with appropriate inputs. Note `TEMPLATE_FILES_DIR` refers to the `app_template_files` subfolder. You can use either a literal or relative path.
 
 In the projects folder, execute the `fresh_app.sh` script by running:
-`bash ./fresh_app.sh`
+```bash
+$ bash ./fresh_app.sh
+```
 
 This script does the following:
 1. Loads `fresh_app.env` variables into active envrionment.
